@@ -37,14 +37,14 @@
 1. **In the Azure search bar, type Virtual Network and Create**
 
 2. **Fill out:**
-  - Name: `CyberLab-VNet`
-  - Region: Same as your Resource Group
+   - Name: `CyberLab-VNet`
+   - Region: Same as your Resource Group
 
 3. **Under IP Addressing, keep the default range or customize it.**
 
 4. **Under Subnets, click Add subnet**
-   - Name: `CyberLab-Subnet`
-   - Subnet range: Leave default or pick `10.0.0.0/24`
+    - Name: `CyberLab-Subnet`
+    - Subnet range: Leave default or pick `10.0.0.0/24`
 
 5.	**Click Review and Create**
 
@@ -55,17 +55,17 @@
 1.	**In Azure, search Virtual Machines and Create**
 
 2.	**Set the following:**
-   - Name: `DC-1`
-   - Region: Same as VNet
-   - Image: Windows Server 2022
-   - Size: Use a small size (e.g., B2s)
-   - Username: `labuser`
-   - Password: Use any easy password to remember
+    - Name: `DC-1`
+    - Region: Same as VNet
+    - Image: Windows Server 2022
+    - Size: Use a small size (e.g., B2s)
+    - Username: `labuser`
+    - Password: Use any easy password to remember
 
 3.	**Under Networking:**
-    - Select `CyberLab-VNet`
-    - Choose the `CyberLab-Subnet`
-    - Public IP: You can enable or disable it (for lab, it’s okay to have it on)
+     - Select `CyberLab-VNet`
+     - Choose the `CyberLab-Subnet`
+     - Public IP: You can enable or disable it (for lab, it’s okay to have it on)
 
 4.	**Click Review and Create**
 
@@ -92,8 +92,8 @@
 1.	**Go to DC-1 > Connect > RDP and download the RDP file**
 
 2.	**Log into the VM using:**
-    - Username: `labuser`
-    - Password: Use your easy password you can remember
+     - Username: `labuser`
+     - Password: Use your easy password you can remember
 
 3.	**Open Start Menu > Search for Windows Defender Firewall**
 
@@ -106,14 +106,14 @@
 ## Part 6: Set Up the Client VM (Client-1)
 
 1. **In Azure, go to Virtual Machines and Create**
-   - Name: `Client-1`
-   - Image: Windows 10 Pro
-   - Username: `labuser`
-   - Password: Use easy password for you to remember
+    - Name: `Client-1`
+    - Image: Windows 10 Pro
+    - Username: `labuser`
+    - Password: Use easy password for you to remember
 
 2.	**In Networking:**
-   - Virtual Network: Select `CyberLab-VNet`
-   - Subnet: `CyberLab-Subnet`
+    - Virtual Network: Select `CyberLab-VNet`
+    - Subnet: `CyberLab-Subnet`
 
 3.	**Click Review and Create**
 
@@ -144,12 +144,12 @@
 ## Part 9: Test the Connection to DC-1
 
 1. **Connect to Client-1 via RDP**
-  - Use the same username and password
+   - Use the same username and password
 
 2.	**Open Command Prompt**
 
 3.	**Type: ping <DC-1 private IP>**
-  - Example: ping `10.0.0.4`
+    - Example: ping `10.0.0.4`
 
 4.	**You should see reply from messages. If so, the connection works!**
 
