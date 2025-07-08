@@ -20,7 +20,7 @@
 ## Part 1: Set Up the Domain Controller (DC-1)
 
 1. **Create a Resource Group**
-   - Go to the Azure Portal: https://portal.azure.com
+   - Go to the Azure Portal: `https://portal.azure.com`
    - In the left menu, click Resource Groups and Create
 
 2. **Choose:**
@@ -46,34 +46,34 @@
     - Name: `CyberLab-Subnet`
     - Subnet range: Leave default or pick `10.0.0.0/24`
 
-5.	**Click Review and Create**
+5. **Click Review and Create**
 
 -----
 
 ## Part 3: Create the Domain Controller VM (Windows Server 2022)
 
-1.	**In Azure, search Virtual Machines and Create**
+1. **In Azure, search Virtual Machines and Create**
 
-2.	**Set the following:**
+2. **Set the following:**
     - Name: `DC-1`
     - Region: Same as VNet
     - Image: Windows Server 2022
     - Size: Use a small size (e.g., B2s)
     - Username: `labuser`
-    - Password: Use any easy password to remember
+    - Password: `Cyberlab123!`
 
-3.	**Under Networking:**
+3. **Under Networking:**
      - Select `CyberLab-VNet`
      - Choose the `CyberLab-Subnet`
      - Public IP: You can enable or disable it (for lab, it’s okay to have it on)
 
-4.	**Click Review and Create**
+4. **Click Review and Create**
 
 -----
 
 ## Part 4: Set DC-1’s Private IP to Static
 	
-1.	**Go to DC-1 > Networking**
+1.	**Go to `DC-1` > `Networking`**
 
 2.	**Click on the Network Interface (NIC)**
 
@@ -89,15 +89,15 @@
 
 ## Part 5: Disable Windows Firewall on DC-1 (for testing)
 	
-1.	**Go to DC-1 > Connect > RDP and download the RDP file**
+1.	**Go to `DC-1` > `Connect` > `RDP and download the RDP file`**
 
 2.	**Log into the VM using:**
      - Username: `labuser`
-     - Password: Use your easy password you can remember
+     - Password: `Cyberlab123!`
 
-3.	**Open Start Menu > Search for Windows Defender Firewall**
+3.	**Open `Start Menu` > Search for `Windows Defender Firewall`**
 
-4.	**Click Turn Windows Defender Firewall on or off**
+4.	**Click `Turn Windows Defender Firewall` on or off**
 
 5.	**Disable for both private and public networks (for lab testing only)**
 
@@ -109,7 +109,7 @@
     - Name: `Client-1`
     - Image: Windows 10 Pro
     - Username: `labuser`
-    - Password: Use easy password for you to remember
+    - Password: `Cyberlab123!`
 
 2.	**In Networking:**
     - Virtual Network: Select `CyberLab-VNet`
@@ -121,35 +121,35 @@
 
 ## Part 7: Set DNS to Point to DC-1
 
-1.	**Go to Client-1 > Networking**
+1.	**Go to `Client-1` > `Networking`**
 
-2.	**Click the NIC (network interface)**
+2.	**Click the `NIC (network interface)`**
 
-3.	**Under DNS Servers, select Custom**
+3.	**Under `DNS Servers`, select `Custom`**
 
-4.	**Enter DC-1’s Private IP Address**
+4.	**Enter `DC-1`’s Private IP Address**
 
-5.	**Click Save**
-
------
-
-## Part 8: Restart Client-1
-
-1.	**Go to Client-1 VM in Azure**
-
-2.	**Click Restart**
+5.	**Click `Save`**
 
 -----
 
-## Part 9: Test the Connection to DC-1
+## Part 8: Restart `Client-1`
 
-1. **Connect to Client-1 via RDP**
+1.	**Go to `Client-1` VM in Azure**
+
+2.	**Click `Restart`**
+
+-----
+
+## Part 9: Test the Connection to `DC-1`
+
+1. **Connect to `Client-1` via RDP**
    - Use the same username and password
 
-2.	**Open Command Prompt**
+2.	**Open `Command Prompt`**
 
-3.	**Type: ping <DC-1 private IP>**
-    - Example: ping `10.0.0.4`
+3.	**Type: `ping` <DC-1 private IP>**
+    - Example: `ping 10.0.0.4`
 
 4.	**You should see reply from messages. If so, the connection works!**
 
@@ -157,13 +157,13 @@
 
 ## Part 10: Check DNS Settings from PowerShell
 
-1.	**Still on Client-1, open PowerShell**
+1.	**Still on `Client-1`, open `PowerShell`**
 
-2.	**Run: ipconfig /all**
+2.	**Run: `ipconfig /all`**
 
-3.	**Scroll to DNS Servers section**
+3.	**Scroll to `DNS Servers` section**
 
-4.	**It should show DC-1’s Private IP address as the DNS server**
+4.	**It should show `DC-1`’s Private IP address as the DNS server**
 
 -----
 
