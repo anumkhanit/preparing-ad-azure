@@ -3,7 +3,7 @@
 </p>
 
 <h1>Preparing AD Infrastructure in Azure</h1>
-<p>A hands-on guide using Azure Virtual Machines for learning Active Directory</p>
+<p>A hands-on five parts of guide on using Azure Virtual Machines to learn how to build and use Active Directory</p>
 
 <h2>Environments and Technologies to use</h2>
 
