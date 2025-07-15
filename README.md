@@ -170,3 +170,5 @@
 ## Conclusion
 
 You’ve now created a Domain Controller (DC-1) on Windows Server 2022 and a Client machine (Client-1) on Windows 10. In which, both are in the same Azure virtual network, and Client-1 can reach the DC!
+
+Move onto the next part: [Deploying Active Directory](https://github.com/anumkhanit/deploy-ad)
