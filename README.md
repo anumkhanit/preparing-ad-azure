@@ -59,8 +59,8 @@
     - Region: Same as VNet
     - Image: Windows Server 2022
     - Size: Use a small size (e.g., B2s)
-    - Username: `labuser`
-    - Password: `Cyberlab123!`
+    - Username: (make any easy username to remember)
+    - Password: (make any easy password to remember)
 
 3. **Under Networking:**
      - Select `CyberLab-VNet`
@@ -79,7 +79,7 @@
 
 3.	**Under IP Configurations, click the listed IP address**
 
-4.	**Change Assignment from Dynamic to Static**
+4.	**Change Assignment from `Dynamic` to `Static`**
 
 5.	**Click Save**
 
@@ -108,8 +108,8 @@
 1. **In Azure, go to Virtual Machines and Create**
     - Name: `Client-1`
     - Image: Windows 10 Pro
-    - Username: `labuser`
-    - Password: `Cyberlab123!`
+    - Username: (make any easy username to remember)
+    - Password: (make any easy password to remember)
 
 2.	**In Networking:**
     - Virtual Network: Select `CyberLab-VNet`
