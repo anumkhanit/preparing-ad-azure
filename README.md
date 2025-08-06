@@ -2,8 +2,11 @@
 <img src="https://i.imgur.com/Ucqw15T.jpeg" alt="Active Directory" width=500 height=300/> 
 </p>
 
-<h1>Preparing AD Infrastructure in Azure</h1>
-<p>A hands-on five parts of guide on using Azure Virtual Machines to learn how to build and use Active Directory</p>
+<h1>🏗️ Preparing Active Directory Infrastructure in Azure (Part 1)</h1>
+<p>A hands-on lab using Microsoft Azure Virtual Machines to set up a foundational Active Directory environment. This is part one of a five-part learning series.</p>
+
+<h1>🧠 Overview</h1>
+<p>In this guide, you’ll learn how to deploy two virtual machines in Azure, which is a Domain Controller (DC-1) running Windows Server 2022 and a Client machine (Client-1) running Windows 10 Pro. You’ll place both machines on the same Virtual Network, configure private IP addressing and DNS, and verify communication between them—laying the groundwork for building a full AD lab.</p>
 
 <h2>Environments and Technologies to use</h2>
 
@@ -17,158 +20,143 @@
 
 -----
 
-## Part 1: Set Up the Domain Controller (DC-1)
+## 🔧 Part 1: Create a Resource Group
 
-1. **Create a Resource Group**
-   - Go to the Azure Portal: `https://portal.azure.com`
-   - In the left menu, click Resource Groups and Create
-
-2. **Choose:**
-   - Subscription: Your default one
-   - Resource Group Name: `CyberLab`
-   - Region: Pick the region closest to you (e.g., East US)
-
-3. **Click Review then click Create**
+1. Go to Azure Portal
+2. In the left menu, click `Resource Groups` > `Create`
+3. Set:
+  - Name: `CyberLab`
+  - Region: Closest to your location (e.g., East US)
+4. Click `Review` + `Create` > `Create`
 
 -----
 
-## Part 2: Create a Virtual Network and Subnet
+## 🌐 Part 2: Create a Virtual Network & Subnet
 
-1. **In the Azure search bar, type Virtual Network and Create**
-
-2. **Fill out:**
-   - Name: `CyberLab-VNet`
-   - Region: Same as your Resource Group
-
-3. **Under IP Addressing, keep the default range or customize it.**
-
-4. **Under Subnets, click Add subnet**
+1. In the Azure search bar, type `Virtual Network` > `Create`
+2. Fill in:
+    - Name: `CyberLab-VNet`
+    - Region: Same as your Resource Group
+3. Under IP Addressing: Leave default or set custom range
+4. Under Subnets:
+    - Click `Add Subnet`
     - Name: `CyberLab-Subnet`
-    - Subnet range: Leave default or pick `10.0.0.0/24`
-
-5. **Click Review and Create**
+    - Address range: `10.0.0.0/24`
+5. Click `Review` + `Create` > `Create`
 
 -----
 
-## Part 3: Create the Domain Controller VM (Windows Server 2022)
+## 🖥️ Part 3: Create the Domain Controller VM (DC-1)
 
-1. **In Azure, search Virtual Machines and Create**
-
-2. **Set the following:**
+1. Go to `Virtual Machines` > `Create`
+2. Set the following:
     - Name: `DC-1`
-    - Region: Same as VNet
-    - Image: Windows Server 2022
-    - Size: Use a small size (e.g., B2s)
-    - Username: (make any easy username to remember)
-    - Password: (make any easy password to remember)
-
-3. **Under Networking:**
-     - Select `CyberLab-VNet`
-     - Choose the `CyberLab-Subnet`
-     - Public IP: You can enable or disable it (for lab, it’s okay to have it on)
-
-4. **Click Review and Create**
+    - Image: `Windows Server 2022`
+    - Size: `B2s` (or similar small instance)
+    - Username: `labuser`
+    - Password: `Cyberlab123!`
+3. Under Networking:
+    - VNet: `CyberLab-VNet`
+    - Subnet: `CyberLab-Subnet`
+    - Public IP: `Enable` or `disable` (for labs, you can keep it on)
+4. Click `Review` + `Create` > `Create`
 
 -----
 
-## Part 4: Set DC-1’s Private IP to Static
+## 🔒 Part 4: Assign a Static Private IP to DC-1
 	
-1.	**Go to `DC-1` > `Networking`**
-
-2.	**Click on the Network Interface (NIC)**
-
-3.	**Under IP Configurations, click the listed IP address**
-
-4.	**Change Assignment from `Dynamic` to `Static`**
-
-5.	**Click Save**
+1. Navigate to `DC-1` > `Networking`
+2. Click on the `Network Interface (NIC)`
+3. Under `IP Configurations`, click the listed `IP address`
+4. Change Assignment from `Dynamic` to `Static`
+5. Click `Save`
 
 ***(Note down this IP address (you’ll need it for Client-1’s DNS)***
 
 -----
 
-## Part 5: Disable Windows Firewall on DC-1 (for testing)
+## 🔥 Part 5: Disable Windows Firewall on DC-1 (for testing only)
 	
-1.	**Go to `DC-1` > `Connect` > `RDP and download the RDP file`**
-
-2.	**Log into the VM using:**
+1. Go to `DC-1` > `Connect` > `RDP` and download the `RDP file`
+2. Log in with:
      - Username: `labuser`
      - Password: `Cyberlab123!`
+3. Search for `Windows Defender Firewall` in the `Start` menu
+4. Click `Turn Windows Defender Firewall` on or off
+5. Disable firewall for both Private and Public networks
 
-3.	**Open `Start Menu` > Search for `Windows Defender Firewall`**
-
-4.	**Click `Turn Windows Defender Firewall` on or off**
-
-5.	**Disable for both private and public networks (for lab testing only)**
+***🚨 Important: This is only for lab testing. Re-enable the firewall later in production environments.***
 
 -----
 
-## Part 6: Set Up the Client VM (Client-1)
+## 💻 Part 6: Create the Client VM (Client-1)
 
-1. **In Azure, go to Virtual Machines and Create**
+1. In Azure, go to `Virtual Machines` > `Create`
+2. Set:
     - Name: `Client-1`
-    - Image: Windows 10 Pro
-    - Username: (make any easy username to remember)
-    - Password: (make any easy password to remember)
-
-2.	**In Networking:**
-    - Virtual Network: Select `CyberLab-VNet`
+    - Image: `Windows 10 Pro`
+    - Username/Password: Choose credentials you’ll remember
+3. Under Networking:
+    - VNet: `CyberLab-VNet`
     - Subnet: `CyberLab-Subnet`
-
-3.	**Click Review and Create**
-
------
-
-## Part 7: Set DNS to Point to DC-1
-
-1.	**Go to `Client-1` > `Networking`**
-
-2.	**Click the `NIC (network interface)`**
-
-3.	**Under `DNS Servers`, select `Custom`**
-
-4.	**Enter `DC-1`’s Private IP Address**
-
-5.	**Click `Save`**
+4. Click `Review` + `Create` > `Create`
 
 -----
 
-## Part 8: Restart `Client-1`
+## 🧭 Part 7: Point Client DNS to the Domain Controller
 
-1.	**Go to `Client-1` VM in Azure**
-
-2.	**Click `Restart`**
+1. Go to `Client-1` > `Networking`
+2. Click the `NIC (Network Interface)`
+3. Under `DNS Servers`, select `Custom`
+4. Enter the private IP address of DC-1
+5. Click `Save`
 
 -----
 
-## Part 9: Test the Connection to `DC-1`
+## 🔁 Part 8: Restart Client-1
 
-1. **Connect to `Client-1` via RDP**
-   - Use the same username and password
+1. In Azure, go to the `Client-1 VM`
+2. Click `Restart`
 
-2.	**Open `Command Prompt`**
+-----
 
-3.	**Type: `ping` <DC-1 private IP>**
+## 🧪 Part 9: Test Connectivity Between VMs
+
+1. Connect to Client-1 via RDP
+2. Open Command Prompt
+3. Type: `ping` <DC-1 private IP>**
     - Example: `ping 10.0.0.4`
 
-4.	**You should see reply from messages. If so, the connection works!**
+***You should see reply from messages. If so, the connection works!***
 
 -----
 
-## Part 10: Check DNS Settings from PowerShell
+## 🧠 Part 10: Check DNS Configuration
 
-1.	**Still on `Client-1`, open `PowerShell`**
+1. On Client-1, open PowerShell
+2. Run: `ipconfig /all`
+3. Scroll to `DNS Servers`
+4. You should see the private IP address of DC-1
 
-2.	**Run: `ipconfig /all`**
-
-3.	**Scroll to `DNS Servers` section**
-
-4.	**It should show `DC-1`’s Private IP address as the DNS server**
+***✅ This confirms that Client-1 is pointing to DC-1 for DNS resolution.***
 
 -----
 
-## Conclusion
+### ✅ Conclusion
 
-You’ve now created a Domain Controller (DC-1) on Windows Server 2022 and a Client machine (Client-1) on Windows 10. In which, both are in the same Azure virtual network, and Client-1 can reach the DC!
+You’ve successfully:
 
-Move onto the next part: [Deploying Active Directory](https://github.com/anumkhanit/deploy-ad)
+- Set up a Windows Server 2022 Domain Controller
+- Created a Windows 10 Client VM
+- Connected both VMs in a private Azure Virtual Network
+- Configured DNS and verified network communication
+
+👉 You’re now ready to move on to [Part 2: Deploying Active Directory](https://github.com/anumkhanit/deploy-ad) where you’ll promote DC-1 as a domain controller and begin domain management.
+
+-----
+
+### 🧠 Want to Learn More?
+
+- [Azure Virtual Machines Docs](https://learn.microsoft.com/en-us/azure/virtual-machines/)
+
+- [Active Directory Basics](https://serveracademy.com/blog/active-directory-101-a-step-by-step-tutorial-for-beginners/)
